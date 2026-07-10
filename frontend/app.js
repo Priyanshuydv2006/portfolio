@@ -2,7 +2,7 @@
    Portfolio Dynamic Logic & Backend Integration
    ========================================================================== */
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://portfolio-1-fhwz.onrender.com/api';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Lucide Icons
