@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A modern, highly animated developer portfolio showcasing creative projects, college certificates, Unstop achievements, resume, and experience.">
+  <meta name="keywords" content="Portfolio, Software Developer, Full Stack, UI/UX, Animations, Resume, College Certificates, Unstop Certificates">
+  <meta name="author" content="Portfolio Developer">
+
+  <!-- Google Fonts (Outfit & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styling Sheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Floating Background Ambient Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- Header & Sticky Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="navLogo">
+        <span class="gradient-text">Dev</span>Portfolio
+      </a>
+      
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active" id="link-home">Home</a>
+        <a href="#about" class="nav-link" id="link-about">About</a>
+        <a href="#resume" class="nav-link" id="link-resume">Resume</a>
+        <a href="#projects" class="nav-link" id="link-projects">Projects</a>
+        <a href="#certificates" class="nav-link" id="link-certificates">Certificates</a>
+        <a href="#contact" class="nav-link" id="link-contact">Contact</a>
+      </nav>
+
+      <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <i data-lucide="menu"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Areas -->
+  <main>
+
+    <!-- Hero Section -->
+    <section id="home" class="section hero-section">
+      <div class="container hero-container">
+        <div class="hero-content scroll-reveal">
+          <div class="badge hero-badge">
+            <span class="pulse-dot"></span> Available for Opportunities
+          </div>
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">Priyanshu Yadav</span><br>
+            Crafting Digital Experiences
+          </h1>
+          <p class="hero-description">
+            I am a full-stack engineer specializing in building visually stunning, modern, and highly performant web applications. Passionate about animations, user experience, and clean code architectures.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary" id="btnHeroWork">
+              <span>View Projects</span>
+              <i data-lucide="arrow-up-right"></i>
+            </a>
+            <a href="#contact" class="btn btn-secondary" id="btnHeroContact">
+              <span>Get In Touch</span>
+            </a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+              <i data-lucide="linkedin"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+              <i data-lucide="instagram"></i>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+              <i data-lucide="github"></i>
+            </a>
+            <a href="mailto:priyanshu.yadav@example.com" class="social-icon" aria-label="Email">
+              <i data-lucide="mail"></i>
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual scroll-reveal">
+          <!-- Glassmorphic Card Showcase -->
+          <div class="visual-card-wrapper">
+            <div class="visual-card glow-card">
+              <div class="card-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="card-body-code">
+                <pre><code><span class="code-keyword">const</span> developer = {
+  name: <span class="code-string" id="heroCodeName">'Loading...'</span>,
+  role: <span class="code-string" id="heroCodeRole">'Loading...'</span>,
+  skills: <span id="heroCodeSkills">['Loading...']</span>,
+  passionate: <span class="code-literal">true</span>
+};</code></pre>
+              </div>
+            </div>
+            <div class="visual-badge design-badge">
+              <i data-lucide="palette"></i>
+              <span>Creative UI</span>
+            </div>
+            <div class="visual-badge code-badge">
+              <i data-lucide="code-2"></i>
+              <span>Clean Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <div class="section-header scroll-reveal">
+          <span class="section-subtitle">Get to Know Me</span>
+          <h2 class="section-title">About Me</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-info scroll-reveal">
+            <p class="about-text" id="aboutText1">Loading...</p>
+            <p class="about-text" id="aboutText2">Loading...</p>
+
+            <div class="personal-details">
+              <div class="detail-item">
+                <span class="detail-label">Location</span>
+                <span class="detail-value" id="profileLocation">Loading...</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Education</span>
+                <span class="detail-value" id="profileEducation">Loading...</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Email</span>
+                <span class="detail-value" id="profileEmail">Loading...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills-wrapper scroll-reveal">
+            <h3 class="skills-title">My Technical Stack</h3>
+            <div class="skills-list" id="skillsListContainer">
+              <!-- JS will inject skills here dynamically -->
+              <div style="text-align: center; color: var(--text-muted); padding: 20px 0; width: 100%;">
+                <span class="pulse-dot" style="display: inline-block; margin-bottom: 10px;"></span>
+                <p>Loading skills...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section resume-section">
+      <div class="container">
+        <div class="section-header scroll-reveal">
+          <span class="section-subtitle">My Education & Journey</span>
+          <h2 class="section-title">Resume & Timeline</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="resume-cta scroll-reveal">
+          <p class="resume-cta-text">Would you like a copy of my professional resume in PDF format?</p>
+          <a href="#" class="btn btn-primary btn-resume" id="downloadResume">
+            <i data-lucide="download"></i>
+            <span>Download Resume (PDF)</span>
+          </a>
+        </div>
+
+        <div class="timeline" id="timelineContainer">
+          <!-- Timeline entries will be loaded dynamically from the database -->
+          <div style="text-align: center; color: var(--text-muted); padding: 40px 0; width: 100%;">
+            <span class="pulse-dot" style="display: inline-block; margin-bottom: 10px;"></span>
+            <p>Loading journey timeline...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+      <div class="container">
+        <div class="section-header scroll-reveal">
+          <span class="section-subtitle">My Recent Work</span>
+          <h2 class="section-title">Projects Hub</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-controls scroll-reveal">
+          <button class="filter-btn active" data-filter="all" id="btnFilterAll">All Projects</button>
+          <button class="filter-btn" data-filter="completed" id="btnFilterCompleted">Completed</button>
+          <button class="filter-btn" data-filter="ongoing" id="btnFilterOngoing">In Progress</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid scroll-reveal" id="projectsGrid">
+          <!-- Projects will be loaded dynamically from the database -->
+          <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 60px 0;">
+            <span class="pulse-dot" style="display: inline-block; margin-bottom: 10px;"></span>
+            <p>Retrieving project details...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section certificates-section">
+      <div class="container">
+        <div class="section-header scroll-reveal">
+          <span class="section-subtitle">My Credentials</span>
+          <h2 class="section-title">Certifications</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="certificates-grid-container">
+          <div class="certificates-list-column scroll-reveal">
+            <!-- Cert Category Tabs -->
+            <div class="cert-tabs">
+              <button class="cert-tab-btn active" data-tab="college" id="btnCertCollegeTab">College Certificates</button>
+              <button class="cert-tab-btn" data-tab="unstop" id="btnCertUnstopTab">Unstop Certificates</button>
+            </div>
+
+            <!-- Certs Grid -->
+            <div class="certs-display-grid" id="certsDisplayGrid">
+              <!-- JS will inject certificates here dynamically -->
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <div class="section-header scroll-reveal">
+          <span class="section-subtitle">Let's Connect</span>
+          <h2 class="section-title">Contact Me</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info scroll-reveal">
+            <h3>Get In Touch</h3>
+            <p>I am open to discuss web design, full-stack engineering, collaborations, or job roles. Feel free to shoot a message!</p>
+            
+            <div class="contact-details-list">
+              <a href="#" class="contact-card" id="contactMailCard">
+                <div class="contact-card-icon">
+                  <i data-lucide="mail"></i>
+                </div>
+                <div class="contact-card-text">
+                  <span>Email Me</span>
+                  <strong id="contactEmailLabel">Loading...</strong>
+                </div>
+              </a>
+
+              <a href="#" target="_blank" rel="noopener noreferrer" class="contact-card" id="contactLinkedinCard">
+                <div class="contact-card-icon">
+                  <i data-lucide="linkedin"></i>
+                </div>
+                <div class="contact-card-text">
+                  <span>Professional Network</span>
+                  <strong id="contactLinkedinLabel">Loading...</strong>
+                </div>
+              </a>
+
+              <a href="#" target="_blank" rel="noopener noreferrer" class="contact-card" id="contactIgCard">
+                <div class="contact-card-icon">
+                  <i data-lucide="instagram"></i>
+                </div>
+                <div class="contact-card-text">
+                  <span>Instagram DM</span>
+                  <strong id="contactIgLabel">Loading...</strong>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form-wrapper scroll-reveal">
+            <div class="glass-card">
+              <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                  <label for="contactName">Your Name</label>
+                  <input type="text" id="contactName" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="contactEmail">Email Address</label>
+                  <input type="email" id="contactEmail" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="contactMessage">Your Message</label>
+                  <textarea id="contactMessage" rows="5" placeholder="Let's build something amazing together..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" id="btnContactSubmit">
+                  <span>Send Message</span>
+                  <i data-lucide="send"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <p>&copy; 2026 Priyanshu Yadav. All Rights Reserved. Built with Visual Excellence.</p>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#" id="btnAdminPortalLink" style="color: var(--primary-color); font-weight: 600;"><i data-lucide="lock" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Admin Panel</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Certificate Previews -->
+  <div class="lightbox hide" id="lightboxModal">
+    <div class="lightbox-overlay" id="lightboxOverlay"></div>
+    <div class="lightbox-container">
+      <button class="btn-close-lightbox" id="btnCloseLightbox" aria-label="Close Lightbox">
+        <i data-lucide="x"></i>
+      </button>
+      <img src="" alt="Fullscreen Certificate" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-details">
+        <h3 id="lightboxTitle">Certificate Title</h3>
+        <p id="lightboxMeta">Issued by State Tech University • June 2024</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Details Modal -->
+  <div class="modal-overlay hide" id="projectModal">
+    <div class="modal-wrapper">
+      <div class="modal-header">
+        <h3 id="modalProjectTitle">Project Title</h3>
+        <button class="btn-close-modal" id="btnCloseModal" aria-label="Close Modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-placeholder" id="modalProjectImg">
+          <!-- Dynamically Colored Box -->
+        </div>
+        <div class="modal-content">
+          <div class="modal-meta">
+            <span class="project-status" id="modalProjectStatus">Completed</span>
+            <span class="modal-date" id="modalProjectDate">Date</span>
+          </div>
+          <p class="modal-description" id="modalProjectDesc">Detailed description of the project goes here. Explaining architecture, visual structures, challenges and design decisions.</p>
+          
+          <div class="modal-tags-section">
+            <h4>Technologies Used</h4>
+            <div class="project-tags" id="modalProjectTags">
+              <!-- Tags injected dynamically -->
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="modalRepoLink">
+              <i data-lucide="github"></i>
+              <span>GitHub Repo</span>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="modalDemoLink">
+              <span>Live Preview</span>
+              <i data-lucide="external-link"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div class="modal-overlay hide" id="adminLoginModal">
+    <div class="modal-wrapper" style="max-width: 400px;">
+      <div class="modal-header">
+        <h3>Admin Security Login</h3>
+        <button class="btn-close-modal" id="btnCloseAdminLogin" aria-label="Close Login">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="adminLoginForm" class="upload-form">
+          <div class="form-group">
+            <label for="adminUsername">Username</label>
+            <input type="text" id="adminUsername" value="admin" required readonly>
+          </div>
+          <div class="form-group">
+            <label for="adminPassword">Admin Password</label>
+            <input type="password" id="adminPassword" placeholder="Enter password" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="btnAdminSubmit">
+            <span>Access Dashboard</span>
+            <i data-lucide="shield-check"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Modal -->
+  <div class="modal-overlay hide" id="adminDashboardModal">
+    <div class="modal-wrapper" style="max-width: 900px; width: 95%;">
+      <div class="modal-header">
+        <h3 style="display: flex; align-items: center; gap: 10px;"><i data-lucide="shield" style="color: var(--primary-color);"></i> Admin Control Center</h3>
+        <div style="display: flex; gap: 15px; align-items: center;">
+          <button class="btn btn-secondary" id="btnAdminLogout" style="padding: 6px 14px; font-size: 0.85rem;">
+            <i data-lucide="log-out"></i> Logout
+          </button>
+          <button class="btn-close-modal" id="btnCloseAdminDashboard" aria-label="Close Dashboard">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <div class="admin-dashboard-layout">
+          <!-- Sidebar Tabs -->
+          <div class="cert-tabs admin-sidebar-tabs">
+            <button class="cert-tab-btn active" data-admin-tab="profile">Configure Profile</button>
+            <button class="cert-tab-btn" data-admin-tab="skills">Manage Skills</button>
+            <button class="cert-tab-btn" data-admin-tab="projects">Manage Projects</button>
+            <button class="cert-tab-btn" data-admin-tab="certs">Manage Credentials</button>
+            <button class="cert-tab-btn" data-admin-tab="timeline">Manage Timeline</button>
+          </div>
+          
+          <!-- Content Panels -->
+          <div class="admin-panels-content" style="max-height: 60vh; overflow-y: auto; padding-right: 10px; flex-grow: 1;">
+            
+            <!-- Tab Panel 1: Profile Config -->
+            <div class="admin-panel-div" id="adminPanel-profile">
+              <h4>Profile Settings</h4>
+              <form id="adminProfileForm" class="upload-form" style="margin-top: 15px;">
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="adminHeroName">Hero Name (Code Block)</label>
+                    <input type="text" id="adminHeroName" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="adminHeroRole">Hero Role (Code Block)</label>
+                    <input type="text" id="adminHeroRole" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="adminHeroSkills">Hero Skills (comma separated)</label>
+                  <input type="text" id="adminHeroSkills" required>
+                </div>
+                <div class="form-group">
+                  <label for="adminAboutText1">About Me (Paragraph 1)</label>
+                  <textarea id="adminAboutText1" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="adminAboutText2">About Me (Paragraph 2)</label>
+                  <textarea id="adminAboutText2" rows="3" required></textarea>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.05); margin: 20px 0;">
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="adminLocation">Location</label>
+                    <input type="text" id="adminLocation" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="adminEducation">Education Major</label>
+                    <input type="text" id="adminEducation" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="adminEmail">Email Address</label>
+                  <input type="email" id="adminEmail" required>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="adminLinkedin">LinkedIn Link URL</label>
+                    <input type="text" id="adminLinkedin" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="adminInstagram">Instagram Link URL</label>
+                    <input type="text" id="adminInstagram" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Update Resume PDF / Image (Base64)</label>
+                  <div class="dropzone" id="resumeDropzone" style="min-height: 85px;">
+                    <input type="file" id="resumeFileInput" accept=".pdf,image/*" class="file-input">
+                    <div class="dropzone-content" id="resumeDropzoneContent">
+                      <i data-lucide="file-text" style="width: 24px; height: 24px; margin-bottom: 5px; color: var(--text-muted);"></i>
+                      <span style="font-size: 0.8rem; color: var(--text-muted);" id="resumeFileLabel">Select PDF file or image</span>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Profile Details</button>
+              </form>
+            </div>
+
+            <!-- Tab Panel 1.5: Skills manager -->
+            <div class="admin-panel-div hide" id="adminPanel-skills">
+              <h4>Add New Technical Skill</h4>
+              <form id="adminSkillForm" class="upload-form" style="margin-top: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px; margin-bottom: 25px;">
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="skillName">Skill Name (e.g. ReactJS)</label>
+                    <input type="text" id="skillName" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="skillPercentage">Proficiency % (0-100)</label>
+                    <input type="number" id="skillPercentage" min="0" max="100" required>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Skill</button>
+              </form>
+
+              <h4>Current Skills</h4>
+              <div id="adminSkillsList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <!-- JS dynamic list -->
+              </div>
+            </div>
+            <!-- Tab Panel 2: Projects manager -->
+            <div class="admin-panel-div hide" id="adminPanel-projects">
+              <h4>Add New Project</h4>
+              <form id="adminProjectForm" class="upload-form" style="margin-top: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px; margin-bottom: 25px;">
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="projTitle">Title</label>
+                    <input type="text" id="projTitle" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="projDate">Date Range / Status</label>
+                    <input type="text" id="projDate" placeholder="e.g. May 2024 / Ongoing" required>
+                  </div>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="projStatus">Status</label>
+                    <select id="projStatus" required>
+                      <option value="Completed">Completed</option>
+                      <option value="In Progress">In Progress</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="projGradient">Card Theme (Gradient)</label>
+                    <select id="projGradient" required>
+                      <option value="gradient-1">Purple-Blue (gradient-1)</option>
+                      <option value="gradient-2">Pink-Red (gradient-2)</option>
+                      <option value="gradient-3">Green-Cyan (gradient-3)</option>
+                      <option value="gradient-4">Orange-Pink (gradient-4)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="projDesc">Short Description</label>
+                  <textarea id="projDesc" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="projTags">Technologies (comma separated)</label>
+                  <input type="text" id="projTags" placeholder="React, NodeJS, Express" required>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="projRepo">GitHub Link</label>
+                    <input type="text" id="projRepo" value="https://github.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="projDemo">Demo Link</label>
+                    <input type="text" id="projDemo" value="#">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Project</button>
+              </form>
+
+              <h4>Existing Projects</h4>
+              <div id="adminProjectsList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <!-- JS dynamic list -->
+              </div>
+            </div>
+
+            <!-- Tab Panel 3: Credentials manager -->
+            <div class="admin-panel-div hide" id="adminPanel-certs">
+              <h4>Add New Certificate</h4>
+              <form id="adminCertForm" class="upload-form" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px; margin-bottom: 25px;">
+                <div class="form-group dropzone" id="adminCertDropzone" style="min-height: 100px;">
+                  <input type="file" id="adminCertFileInput" accept="image/*" class="file-input" required>
+                  <div class="dropzone-content" id="adminCertDropzoneContent">
+                    <i data-lucide="image" class="dropzone-icon" style="width: 24px; height: 24px; color: var(--text-muted);"></i>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Click or drop image to upload</span>
+                  </div>
+                  <div class="dropzone-preview hide" id="adminCertDropzonePreview">
+                    <img src="" alt="Preview" id="adminCertPreviewImage">
+                  </div>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="adminCertTitle">Title</label>
+                    <input type="text" id="adminCertTitle" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="adminCertIssuer">Issuer</label>
+                    <input type="text" id="adminCertIssuer" required>
+                  </div>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="adminCertDate">Date</label>
+                    <input type="month" id="adminCertDate" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="adminCertType">Category</label>
+                    <select id="adminCertType" required>
+                      <option value="college">College</option>
+                      <option value="unstop">Unstop</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Certificate</button>
+              </form>
+
+              <h4>Uploaded Credentials</h4>
+              <div id="adminCertsList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <!-- JS dynamic list -->
+              </div>
+            </div>
+
+            <!-- Tab Panel 4: Career Timeline manager -->
+            <div class="admin-panel-div hide" id="adminPanel-timeline">
+              <h4>Add Career Timeline Card</h4>
+              <form id="adminTimelineForm" class="upload-form" style="margin-top: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px; margin-bottom: 25px;">
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="timeTitle">Position / Degree</label>
+                    <input type="text" id="timeTitle" placeholder="e.g. B.Tech in E&C" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="timeDate">Date Range</label>
+                    <input type="text" id="timeDate" placeholder="e.g. August 2025 - Present" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="timeSubtitle">Organization / University</label>
+                  <input type="text" id="timeSubtitle" placeholder="e.g. State Tech University" required>
+                </div>
+                <div class="form-group">
+                  <label for="timeContent">Job Description / Details</label>
+                  <textarea id="timeContent" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Timeline Item</button>
+              </form>
+
+              <h4>Timeline History</h4>
+              <div id="adminTimelineList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <!-- JS dynamic list -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script File -->
+  <script src="app.js"></script>
+</body>
+</html>
