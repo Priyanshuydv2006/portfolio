@@ -42,15 +42,37 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('aboutText1').innerText = profileData.aboutText1;
       document.getElementById('aboutText2').innerText = profileData.aboutText2;
       
+      // Hero Socials - normalize URLs
+      const heroLinkedinUrl = profileData.linkedin && !profileData.linkedin.startsWith('http') ? 'https://' + profileData.linkedin : profileData.linkedin;
+      const heroIgUrl = profileData.instagram && !profileData.instagram.startsWith('http') ? 'https://' + profileData.instagram : profileData.instagram;
+      const heroGithubUrl = profileData.github && !profileData.github.startsWith('http') ? 'https://' + profileData.github : profileData.github;
+
+      const heroMail = document.getElementById('heroMail');
+      if (profileData.email) { heroMail.setAttribute('href', `mailto:${profileData.email}`); heroMail.style.display = 'inline-flex'; } else { heroMail.style.display = 'none'; }
+      const heroLinkedin = document.getElementById('heroLinkedin');
+      if (profileData.linkedin) { heroLinkedin.setAttribute('href', heroLinkedinUrl); heroLinkedin.style.display = 'inline-flex'; } else { heroLinkedin.style.display = 'none'; }
+      const heroIg = document.getElementById('heroIg');
+      if (profileData.instagram) { heroIg.setAttribute('href', heroIgUrl); heroIg.style.display = 'inline-flex'; } else { heroIg.style.display = 'none'; }
+      const heroGithub = document.getElementById('heroGithub');
+      if (profileData.github) { heroGithub.setAttribute('href', heroGithubUrl); heroGithub.style.display = 'inline-flex'; } else { heroGithub.style.display = 'none'; }
+
       // Contact Details Grid
       document.getElementById('contactEmailLabel').innerText = profileData.email;
       document.getElementById('contactMailCard').setAttribute('href', `mailto:${profileData.email}`);
       
-      document.getElementById('contactLinkedinLabel').innerText = profileData.linkedin.replace('https://', '').replace('www.', '');
-      document.getElementById('contactLinkedinCard').setAttribute('href', profileData.linkedin);
+      // Ensure URLs have protocol
+      const linkedinUrl = profileData.linkedin && !profileData.linkedin.startsWith('http') ? 'https://' + profileData.linkedin : profileData.linkedin;
+      const instagramUrl = profileData.instagram && !profileData.instagram.startsWith('http') ? 'https://' + profileData.instagram : profileData.instagram;
       
-      document.getElementById('contactIgLabel').innerText = profileData.instagram.replace('https://', '').replace('www.', '');
-      document.getElementById('contactIgCard').setAttribute('href', profileData.instagram);
+      const cleanLinkedin = linkedinUrl.replace('https://', '').replace('www.', '').replace(/\/$/, '');
+      const liUsername = cleanLinkedin.split('/').pop().split('?')[0];
+      document.getElementById('contactLinkedinLabel').innerText = liUsername && !liUsername.includes('linkedin.com') ? `@${liUsername}` : 'Visit Profile';
+      document.getElementById('contactLinkedinCard').setAttribute('href', linkedinUrl);
+      
+      const cleanIg = instagramUrl.replace('https://', '').replace('www.', '').replace(/\/$/, '');
+      const igUsername = cleanIg.split('/').pop().split('?')[0];
+      document.getElementById('contactIgLabel').innerText = igUsername && !igUsername.includes('instagram.com') ? `@${igUsername}` : 'Visit Profile';
+      document.getElementById('contactIgCard').setAttribute('href', instagramUrl);
 
       // Prepopulate Admin Form fields if logged in
       if (isAdminLoggedIn()) {
@@ -59,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('adminEmail').value = profileData.email;
         document.getElementById('adminLinkedin').value = profileData.linkedin;
         document.getElementById('adminInstagram').value = profileData.instagram;
+        document.getElementById('adminGithub').value = profileData.github || '';
         document.getElementById('adminHeroName').value = profileData.heroName || '';
         document.getElementById('adminHeroRole').value = profileData.heroRole || '';
         document.getElementById('adminHeroSkills').value = skillsArray.join(', ');
@@ -183,10 +206,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (project.gradientClass === 'gradient-2') iconName = 'trending-up';
       if (project.gradientClass === 'gradient-4') iconName = 'sliders';
 
-      card.innerHTML = `
+      let mediaHtml = `
         <div class="project-image-placeholder ${project.gradientClass}">
           <i data-lucide="${iconName}" class="project-icon"></i>
         </div>
+      `;
+      if (project.imageBase64) {
+        mediaHtml = `<div class="project-image-placeholder" style="background-image: url('${project.imageBase64}'); background-size: cover; background-position: center;"></div>`;
+      }
+
+      card.innerHTML = `
+        ${mediaHtml}
         <div class="project-content">
           <span class="project-status ${project.statusClass}">${project.status}</span>
           <h3 class="project-title">${project.title}</h3>
@@ -446,15 +476,39 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="admin-item-title">${p.title}</span>
           <span class="admin-item-subtitle">${p.date} • ${p.status}</span>
         </div>
-        <button class="btn-delete-item" data-delete-project-id="${p.id}">
-          <i data-lucide="trash-2" style="width:14px; height:14px;"></i> Delete
-        </button>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-edit-item" style="background: rgba(139, 92, 246, 0.1); color: var(--primary-color); border: 1px solid rgba(139, 92, 246, 0.2); padding: 6px 14px; border-radius: var(--border-radius-sm); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600;" data-edit-project-id="${p.id}">
+            <i data-lucide="edit-2" style="width:14px; height:14px;"></i> Edit
+          </button>
+          <button class="btn-delete-item" data-delete-project-id="${p.id}">
+            <i data-lucide="trash-2" style="width:14px; height:14px;"></i> Delete
+          </button>
+        </div>
       `;
 
+      row.querySelector('.btn-edit-item').addEventListener('click', () => editProject(p));
       row.querySelector('.btn-delete-item').addEventListener('click', () => deleteProject(p.id));
       list.appendChild(row);
     });
     lucide.createIcons();
+  }
+
+  function editProject(p) {
+    document.getElementById('projId').value = p.id;
+    document.getElementById('projTitle').value = p.title;
+    document.getElementById('projDate').value = p.date;
+    document.getElementById('projStatus').value = p.status;
+    document.getElementById('projGradient').value = p.gradientClass;
+    document.getElementById('projDesc').value = p.desc;
+    document.getElementById('projTags').value = p.tags.join(', ');
+    document.getElementById('projRepo').value = p.repo;
+    document.getElementById('projDemo').value = p.demo;
+    
+    document.getElementById('projFormTitle').innerText = 'Edit Project';
+    document.getElementById('btnProjSubmitText').innerText = 'Save Changes';
+    document.getElementById('btnProjCancelEdit').classList.remove('hide');
+    document.getElementById('projFileLabel').innerText = p.imageBase64 ? 'Image present. Upload new to replace.' : 'Select an image';
+    window.scrollTo({ top: document.getElementById('adminProjectForm').offsetTop - 150, behavior: 'smooth' });
   }
 
   // Render certs manage list
@@ -518,6 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('adminEmail').value;
     const linkedin = document.getElementById('adminLinkedin').value;
     const instagram = document.getElementById('adminInstagram').value;
+    const github = document.getElementById('adminGithub').value;
     const heroName = document.getElementById('adminHeroName').value;
     const heroRole = document.getElementById('adminHeroRole').value;
     const heroSkillsInput = document.getElementById('adminHeroSkills').value;
@@ -537,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(`${API_BASE}/profile`, {
         method: 'PUT',
         headers: getAuthHeaders(),
-        body: JSON.stringify({ location, education, email, linkedin, instagram, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2 })
+        body: JSON.stringify({ location, education, email, linkedin, instagram, github, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2 })
       });
 
       if (res.ok) {
@@ -573,10 +628,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Add Project Form
+  // Project Photo Upload
+  let uploadedProjBase64 = '';
+  const projFileInput = document.getElementById('projFileInput');
+  const projFileLabel = document.getElementById('projFileLabel');
+  
+  if (projFileInput) {
+    projFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length > 0) {
+        const file = e.target.files[0];
+        projFileLabel.innerText = `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+        
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          uploadedProjBase64 = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  // Cancel Edit
+  const btnProjCancelEdit = document.getElementById('btnProjCancelEdit');
+  btnProjCancelEdit.addEventListener('click', () => {
+    adminProjectForm.reset();
+    document.getElementById('projId').value = '';
+    document.getElementById('projFormTitle').innerText = 'Add New Project';
+    document.getElementById('btnProjSubmitText').innerText = 'Add Project';
+    btnProjCancelEdit.classList.add('hide');
+    projFileLabel.innerText = 'Select an image';
+    uploadedProjBase64 = '';
+  });
+
+  // Add/Edit Project Form
   const adminProjectForm = document.getElementById('adminProjectForm');
   adminProjectForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const projId = document.getElementById('projId').value;
     const title = document.getElementById('projTitle').value;
     const date = document.getElementById('projDate').value;
     const status = document.getElementById('projStatus').value;
@@ -589,24 +677,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const tags = tagsInput.split(',').map(t => t.trim()).filter(t => t !== '');
     const statusClass = status === 'Completed' ? 'badge-completed' : 'badge-ongoing';
 
+    // if editing, we might not have uploaded a new image, so check if we already have one
+    let imageBase64 = uploadedProjBase64;
+    if (projId && !imageBase64) {
+      const existingProj = projectsData.find(p => p.id === projId);
+      if (existingProj && existingProj.imageBase64) imageBase64 = existingProj.imageBase64;
+    }
+
     try {
-      const res = await fetch(`${API_BASE}/projects`, {
-        method: 'POST',
+      const url = projId ? `${API_BASE}/projects/${projId}` : `${API_BASE}/projects`;
+      const method = projId ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method: method,
         headers: getAuthHeaders(),
-        body: JSON.stringify({ title, date, status, statusClass, gradientClass, desc, tags, repo, demo })
+        body: JSON.stringify({ title, date, status, statusClass, gradientClass, desc, tags, repo, demo, imageBase64 })
       });
 
       if (res.ok) {
-        alert('Project added successfully!');
-        adminProjectForm.reset();
+        alert(projId ? 'Project updated successfully!' : 'Project added successfully!');
+        btnProjCancelEdit.click(); // Reset form
         fetchProjects();
       } else {
         const err = await res.json();
-        alert(err.error || 'Failed to add project.');
+        alert(err.error || 'Failed to save project.');
       }
     } catch (err) {
       console.error(err);
-      alert('Error adding project.');
+      alert('Error saving project.');
     }
   });
 
@@ -972,8 +1070,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openProjectModal(project, iconName) {
     modalTitle.innerText = project.title;
-    modalImg.className = 'modal-image-placeholder ' + project.gradientClass;
-    modalImg.innerHTML = `<i data-lucide="${iconName}" style="width:64px; height:64px; color:white;"></i>`;
+    if (project.imageBase64) {
+      modalImg.className = 'modal-image-placeholder';
+      modalImg.innerHTML = '';
+      modalImg.style.backgroundImage = `url('${project.imageBase64}')`;
+      modalImg.style.backgroundSize = 'cover';
+      modalImg.style.backgroundPosition = 'center';
+    } else {
+      modalImg.className = 'modal-image-placeholder ' + project.gradientClass;
+      modalImg.style.backgroundImage = 'none';
+      modalImg.innerHTML = `<i data-lucide="${iconName}" style="width:64px; height:64px; color:white;"></i>`;
+    }
     modalStatus.innerText = project.status;
     modalStatus.className = 'project-status ' + project.statusClass;
     modalDate.innerText = project.date;
