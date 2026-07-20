@@ -99,6 +99,15 @@ async function initializeDB() {
   await addProfileColumn('heroSkillsArray TEXT');
   await addProfileColumn('aboutText1 TEXT');
   await addProfileColumn('aboutText2 TEXT');
+  await addProfileColumn('github TEXT');
+
+  const addProjectColumn = async (columnDef) => {
+    try {
+      await db.exec(`ALTER TABLE projects ADD COLUMN ${columnDef}`);
+    } catch (e) {
+    }
+  };
+  await addProjectColumn('imageBase64 TEXT');
 
 
   // Setup Admin user if not present
@@ -113,8 +122,8 @@ async function initializeDB() {
   const profileCount = await db.get('SELECT COUNT(*) as count FROM profile');
   if (profileCount.count === 0) {
     await db.run(`
-      INSERT INTO profile (id, location, education, email, linkedin, instagram, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO profile (id, location, education, email, linkedin, instagram, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2, github)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `, [
       'main', 
       'San Francisco, CA', 
@@ -127,7 +136,8 @@ async function initializeDB() {
       'Full Stack Developer', // heroRole
       JSON.stringify(['JS', 'React', 'Node', 'CSS']), // heroSkillsArray
       'I am a driven software engineer with a strong foundation in modern web technologies. I love combining technical skills with creative designs to build websites that look fantastic and work flawlessly.', // aboutText1
-      "In college, I've actively engaged in academic projects, hackathons, and national coding platforms like Unstop to continually refine my problem-solving ability. I thrive in collaborative environments and enjoy taking on challenging projects." // aboutText2
+      "In college, I've actively engaged in academic projects, hackathons, and national coding platforms like Unstop to continually refine my problem-solving ability. I thrive in collaborative environments and enjoy taking on challenging projects.", // aboutText2
+      'github.com/priyanshu-codes' // github
     ]);
   } else {
     // Ensure existing rows have the new default values if they are null
@@ -137,7 +147,8 @@ async function initializeDB() {
         heroRole = COALESCE(heroRole, 'Full Stack Developer'),
         heroSkillsArray = COALESCE(heroSkillsArray, '["JS", "React", "Node", "CSS"]'),
         aboutText1 = COALESCE(aboutText1, 'I am a driven software engineer with a strong foundation in modern web technologies. I love combining technical skills with creative designs to build websites that look fantastic and work flawlessly.'),
-        aboutText2 = COALESCE(aboutText2, 'In college, I''ve actively engaged in academic projects, hackathons, and national coding platforms like Unstop to continually refine my problem-solving ability. I thrive in collaborative environments and enjoy taking on challenging projects.')
+        aboutText2 = COALESCE(aboutText2, 'In college, I''ve actively engaged in academic projects, hackathons, and national coding platforms like Unstop to continually refine my problem-solving ability. I thrive in collaborative environments and enjoy taking on challenging projects.'),
+        github = COALESCE(github, 'github.com/priyanshu-codes')
       WHERE id = 'main'
     `);
   }
@@ -319,14 +330,14 @@ app.get('/api/profile', async (req, res) => {
 });
 
 app.put('/api/profile', authenticateAdmin, async (req, res) => {
-  const { location, education, email, linkedin, instagram, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2 } = req.body;
+  const { location, education, email, linkedin, instagram, github, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2 } = req.body;
   try {
     await db.run(`
       UPDATE profile
-      SET location = ?, education = ?, email = ?, linkedin = ?, instagram = ?, resumeBase64 = ?,
+      SET location = ?, education = ?, email = ?, linkedin = ?, instagram = ?, github = ?, resumeBase64 = ?,
           heroName = ?, heroRole = ?, heroSkillsArray = ?, aboutText1 = ?, aboutText2 = ?
       WHERE id = 'main'
-    `, [location, education, email, linkedin, instagram, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2]);
+    `, [location, education, email, linkedin, instagram, github, resumeBase64, heroName, heroRole, heroSkillsArray, aboutText1, aboutText2]);
     res.json({ message: 'Profile updated successfully.' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to update profile.' });
@@ -379,16 +390,30 @@ app.get('/api/projects', async (req, res) => {
 });
 
 app.post('/api/projects', authenticateAdmin, async (req, res) => {
-  const { title, status, statusClass, date, desc, tags, gradientClass, repo, demo } = req.body;
+  const { title, status, statusClass, date, desc, tags, gradientClass, repo, demo, imageBase64 } = req.body;
   const id = 'proj-' + Date.now();
   try {
     await db.run(`
-      INSERT INTO projects (id, title, status, statusClass, date, desc, tags, gradientClass, repo, demo)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `, [id, title, status, statusClass, date, desc, JSON.stringify(tags || []), gradientClass, repo, demo]);
+      INSERT INTO projects (id, title, status, statusClass, date, desc, tags, gradientClass, repo, demo, imageBase64)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [id, title, status, statusClass, date, desc, JSON.stringify(tags || []), gradientClass, repo, demo, imageBase64 || '']);
     res.status(201).json({ id, message: 'Project created successfully.' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to create project.' });
+  }
+});
+
+app.put('/api/projects/:id', authenticateAdmin, async (req, res) => {
+  const { title, status, statusClass, date, desc, tags, gradientClass, repo, demo, imageBase64 } = req.body;
+  try {
+    await db.run(`
+      UPDATE projects
+      SET title = ?, status = ?, statusClass = ?, date = ?, desc = ?, tags = ?, gradientClass = ?, repo = ?, demo = ?, imageBase64 = ?
+      WHERE id = ?
+    `, [title, status, statusClass, date, desc, JSON.stringify(tags || []), gradientClass, repo, demo, imageBase64 || '', req.params.id]);
+    res.json({ message: 'Project updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update project.' });
   }
 });
 
